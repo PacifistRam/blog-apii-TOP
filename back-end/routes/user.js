@@ -16,6 +16,9 @@ userRouter.post("/author/create",userController.postCreateAuthor )
 // delete author with their pots
 userRouter.delete("/author/delete-with-post/:id", userController.deleteAuthor)
 
+// create admin route
+userRouter.post("/admin/create",userController.createNewAdmin)
+
 
 // test login route
 userRouter.get("/Check/:id", authController.getUser)

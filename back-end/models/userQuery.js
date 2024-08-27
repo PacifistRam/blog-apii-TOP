@@ -214,7 +214,37 @@ async function deleteAuthorAndPosts(id) {
   }
 }
 
-
+// create bew admin
+async function createAdmin (name, email, password) {
+  try {
+    const newAdmin = await prisma.user.create({
+      data:{
+        name: name,
+        email: email,
+        password: password,
+        role: Role.admin
+      }
+    })
+    if(newAdmin) {
+      return{
+        success: true,
+        data: newAdmin
+      }
+    }else {
+      return{
+        success: false,
+        message: " Error in creating new user"
+      }
+    }
+  } catch (error) {
+    console.error("Database error: ", error.message)
+    return{
+      success: false,
+      message: "database error while creating new author",
+      error: error.message
+    }
+  }
+}
 
 
 // update name of user
@@ -262,5 +292,6 @@ module.exports = {
     getAllUsers,
     createAuthor,
     updateUser,
-    deleteAuthorAndPosts
+    deleteAuthorAndPosts,
+    createAdmin
 }
